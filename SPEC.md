@@ -1,7 +1,12 @@
-# Game Results Tracking Platform - Requirements Specification
+# Game Results Tracking Platform - Workshop Requirements Specification
+
+## Workshop Context
+**Duration**: 4-hour hackathon workshop  
+**Format**: Teams will compete to build the best solution based on a provided skeleton  
+**Goal**: Create a working game results tracking platform with unique team-specific features
 
 ## Overview
-A platform for tracking game results across different types of games (video games, table games, card games) with scoreboards and player rankings.
+A platform for tracking game results across different types of games (video games, table games, card games) with scoreboards and player rankings. Each team will extend the base implementation in different creative directions.
 
 ## Core Requirements
 
@@ -38,35 +43,51 @@ A platform for tracking game results across different types of games (video game
 - **R5.3** All data SHALL be stored persistently
 - **R5.4** The system SHALL support multiple concurrent users
 
-## Open-Ended Extension Points
-The following areas are intentionally left open for hackathon participants to explore and implement creatively:
+## Provided Skeleton (Hour 0)
+A basic starter implementation will include:
+- Basic API structure with endpoints stubs
+- Database schema for users, games, and results
+- Simple frontend template with routing
+- Image upload functionality
+- Docker compose setup for easy deployment
 
-### Ranking Algorithms
-- How should players be ranked? (Simple win/loss, point systems, ELO ratings, etc.)
-- Should different games use different ranking systems?
+## Team Competition Tracks (Hours 1-4)
+Teams can choose to excel in one or more of these areas:
 
-### Social Features
-- How can players interact with each other?
-- What information should be visible on player profiles?
-- Should there be team/group functionalities?
+### Track A: Advanced Rankings & Analytics
+- Implement sophisticated ranking algorithms (ELO, Glicko, TrueSkill)
+- Create detailed player statistics and insights
+- Build performance prediction models
+- Design head-to-head comparison tools
 
-### Game Categories & Organization
-- How should games be categorized and filtered?
-- Should there be support for tournaments or leagues?
-- Can games have multiple modes or variations?
+### Track B: Social & Engagement Features
+- Build real-time game notifications
+- Create player profiles and social connections
+- Implement team/clan functionality
+- Add commenting and reactions to game results
+- Design achievement and badge systems
 
-### Data Visualization
-- How should statistics be displayed?
-- What insights can be derived from game history?
-- How can performance trends be shown?
+### Track C: Tournament & League Management
+- Create tournament bracket systems
+- Implement season/league functionality
+- Build scheduling and matchmaking features
+- Design automated tournament progression
 
-### Gamification
-- Should there be achievements or badges?
-- How can we encourage regular participation?
-- What makes the platform engaging?
+### Track D: User Experience & Visualization
+- Create beautiful, interactive scoreboards
+- Build mobile-responsive interfaces
+- Implement real-time updates
+- Design data visualization dashboards
+- Add game-specific themes and customization
+
+### Track E: Game-Specific Integrations
+- Build specialized scoring for different game types
+- Create game-specific rules and validations
+- Implement handicap systems
+- Design multi-game championships
 
 ## Minimum Viable Product (MVP)
-For the hackathon baseline, implement at least:
+Each team must implement at least:
 1. User creation with username
 2. Create a game with image upload
 3. Submit game results
@@ -84,9 +105,23 @@ For the hackathon baseline, implement at least:
 2. **FIFA tournaments**: Friends track their PlayStation FIFA matches across multiple sessions
 3. **Card game nights**: Regular poker or card game groups track their wins and losses over time
 
-## Success Criteria
-The solution should allow users to:
-- Create and identify games through images
-- Track results over time
-- View competitive rankings
-- Discover what games others are playing
+## Competition Judging Criteria
+Teams will be evaluated on:
+1. **Core Functionality** (25%): MVP requirements work correctly
+2. **Track Excellence** (35%): Depth and quality of chosen track implementation
+3. **Innovation** (20%): Creative solutions and unique features
+4. **Code Quality** (10%): Clean, maintainable, and well-structured code
+5. **Demo & Presentation** (10%): Clear demonstration of features and value
+
+## Workshop Timeline
+- **Hour 0**: Setup, skeleton walkthrough, team formation
+- **Hour 1-3**: Development sprint
+- **Hour 3.5**: Final commits, prepare demos
+- **Hour 4**: Team presentations and judging
+
+## Tips for Success
+- Focus on your chosen track after completing MVP
+- Use the skeleton effectively - don't reinvent basics
+- Collaborate within your team, compete between teams
+- Think about what would make YOUR game tracking experience better
+- Demo the unique value your team brings
