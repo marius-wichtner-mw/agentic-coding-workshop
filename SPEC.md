@@ -1,114 +1,92 @@
-# Game Results Tracking Platform - Product Specification
+# Game Results Tracking Platform - Requirements Specification
 
-## Vision
-A unified platform for tracking and comparing game results across various types of games, enabling players to maintain scoreboards, track performance over time, and build competitive communities around their favorite games.
+## Overview
+A platform for tracking game results across different types of games (video games, table games, card games) with scoreboards and player rankings.
 
-## User Stories
+## Core Requirements
 
-### As a Player
-- I want to create an account with just a username so I can start tracking my games immediately
-- I want to add game results after playing so I can track my performance
-- I want to view scoreboards to see how I rank against other players
-- I want to see my game history to track my improvement over time
-- I want to upload images when creating new game types so others can easily identify them
+### R1: User Management
+- **R1.1** Users SHALL be able to create an account using only a username
+- **R1.2** Users SHALL be able to modify their username
+- **R1.3** The system SHALL support future integration with proper authentication mechanisms
 
-### As a Game Organizer
-- I want to create new game entries by uploading an image so players can find and track results for that game
-- I want to see all results for games I've created to understand player engagement
-- I want to manage scoreboards for different game modes or tournaments
+### R2: Game Management
+- **R2.1** Users SHALL be able to create new game entries
+- **R2.2** Game creation SHALL include uploading an image to identify the game
+- **R2.3** Games SHALL have a name and type (e.g., video game, table game, card game)
+- **R2.4** Users SHALL be able to browse and search for existing games
 
-## Core Features
-
-### 1. User Management
-- **Simple Registration**: Users can create accounts using only a username (no email/password initially)
-- **Profile Management**: Users can modify their username and profile information
-- **Authentication Placeholder**: System designed to easily integrate with proper authentication later
-
-### 2. Game Management
-- **Game Creation**: Users can add new games to the platform by:
-  - Uploading an image of the game (e.g., PlayStation console, foosball table, card deck)
-  - Providing game name and description
-  - Setting game type (video game, table game, card game, etc.)
-- **Game Discovery**: Browse and search available games
-- **Game Categories**: Support for various game types including:
-  - Console games (PlayStation FIFA, etc.)
-  - Table games (Foosball/Kicker)
-  - Card games
-  - Board games
-
-### 3. Result Tracking
-- **Result Entry**: Players can submit game results including:
-  - Game played
+### R3: Result Tracking
+- **R3.1** Users SHALL be able to submit game results
+- **R3.2** A game result MUST include:
+  - The game played
   - Players involved
-  - Scores/outcomes
-  - Date and time
-  - Optional notes or comments
-- **Result Verification**: Option for other players to confirm results
-- **Historical Data**: Complete history of all games played
+  - Final scores or outcome
+  - Timestamp
+- **R3.3** Users SHALL be able to view their game history
+- **R3.4** The system SHALL store all game results persistently
 
-### 4. Scoreboards & Rankings
-- **Dynamic Scoreboards**: Automatically updated rankings based on game results
-- **Multiple Ranking Systems**: 
-  - Win/loss ratios
-  - Point-based systems
-  - ELO-style ratings
-- **Time-based Views**: Daily, weekly, monthly, and all-time scoreboards
-- **Game-specific Scoreboards**: Separate rankings for each game
+### R4: Scoreboards
+- **R4.1** The system SHALL display scoreboards for each game
+- **R4.2** Scoreboards SHALL show player rankings based on wins/losses
+- **R4.3** Users SHALL be able to view overall standings
+- **R4.4** Rankings SHALL update automatically when new results are added
 
-### 5. Social Features
-- **Recent Activity Feed**: See latest game results from all players
-- **Player Profiles**: View other players' statistics and game history
-- **Head-to-head Records**: Track performance against specific opponents
+### R5: System Requirements
+- **R5.1** The system SHALL support image uploads
+- **R5.2** The system SHALL provide a backend service with API
+- **R5.3** All data SHALL be stored persistently
+- **R5.4** The system SHALL support multiple concurrent users
 
-## Technical Requirements
+## Open-Ended Extension Points
+The following areas are intentionally left open for hackathon participants to explore and implement creatively:
 
-### Data Management
-- Persistent storage of all user data, games, and results
-- Image upload and storage capability
-- Scalable to handle multiple concurrent users
+### Ranking Algorithms
+- How should players be ranked? (Simple win/loss, point systems, ELO ratings, etc.)
+- Should different games use different ranking systems?
 
-### API Design
-- RESTful API for all operations
-- Clear separation between frontend and backend
-- Stateless design for easy scaling
+### Social Features
+- How can players interact with each other?
+- What information should be visible on player profiles?
+- Should there be team/group functionalities?
 
-### User Experience
-- Responsive design for mobile and desktop
-- Quick result entry process (minimal clicks/taps)
-- Real-time scoreboard updates
-- Intuitive game discovery and selection
+### Game Categories & Organization
+- How should games be categorized and filtered?
+- Should there be support for tournaments or leagues?
+- Can games have multiple modes or variations?
 
-## Security & Privacy
-- User data protection
-- Optional result privacy settings
-- Ability to delete own data
-- No sensitive information storage in initial version
+### Data Visualization
+- How should statistics be displayed?
+- What insights can be derived from game history?
+- How can performance trends be shown?
 
-## Future Considerations
-- Tournament bracket creation and management
-- Team-based competitions
-- Integration with gaming platforms APIs
-- Advanced statistics and analytics
-- Mobile applications
-- Social login integration
-- Achievements and badges system
-- Spectator mode for live games
+### Gamification
+- Should there be achievements or badges?
+- How can we encourage regular participation?
+- What makes the platform engaging?
 
-## Success Metrics
-- Number of active users
-- Games tracked per user
-- User retention rate
-- Average session duration
-- Number of games added to platform
-- Frequency of result submissions
+## Minimum Viable Product (MVP)
+For the hackathon baseline, implement at least:
+1. User creation with username
+2. Create a game with image upload
+3. Submit game results
+4. View a basic scoreboard
+5. Browse existing games
 
-## MVP Scope
-For the initial release, focus on:
-1. Basic user creation with username only
-2. Image upload for game creation
-3. Simple result entry
-4. Basic scoreboards (win/loss)
-5. View recent games
-6. Search and browse games
+## Constraints
+- No real authentication required initially (username only)
+- Focus on functionality over visual design
+- Backend API should be RESTful
+- Data must persist between sessions
 
-This specification provides a foundation for building a versatile game tracking platform that can grow with user needs while maintaining simplicity and ease of use.
+## Example Use Cases
+1. **Foosball at the office**: Employees track their daily foosball matches, maintaining a company-wide leaderboard
+2. **FIFA tournaments**: Friends track their PlayStation FIFA matches across multiple sessions
+3. **Card game nights**: Regular poker or card game groups track their wins and losses over time
+
+## Success Criteria
+The solution should allow users to:
+- Create and identify games through images
+- Track results over time
+- View competitive rankings
+- Discover what games others are playing
