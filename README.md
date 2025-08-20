@@ -56,22 +56,6 @@ Build a platform for tracking game results with scoreboards and rankings. See [S
 - **Innovation**: Creative solutions and unique features
 - **AI Usage**: Effective use of agentic coding techniques
 
-## Getting Started
-
-### Repository Structure
-```
-/
-├── README.md          # This file
-├── SPEC.md           # Feature requirements
-└── skeleton/         # Starter code (will be provided)
-```
-
-### Development Tips
-1. **Use AI Effectively**: Leverage AI for code generation, debugging, and architecture decisions
-2. **Divide Work**: Split tasks based on team strengths
-3. **Focus on MVP First**: Complete core requirements before adding extras
-4. **Document AI Usage**: Have AI generate architecture summaries for your presentation
-
 ## Presentation Guidelines
 
 Each team will present for 5 minutes covering:
@@ -87,7 +71,6 @@ Top teams will be awarded based on combined functional and non-functional scores
 ## Resources
 
 - **Requirements**: See [SPEC.md](SPEC.md)
-- **Starter Code**: Available at workshop start
 - **Support**: Workshop facilitators will be available for questions
 
 ---
