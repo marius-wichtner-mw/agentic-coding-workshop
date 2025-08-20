@@ -55,7 +55,9 @@ The basic implementation must include:
 ## Example Use Cases
 1. **Foosball at the office**: Employees track their daily foosball matches, maintaining a company-wide leaderboard
 2. **FIFA tournaments**: Friends track their PlayStation FIFA matches across multiple sessions
-3. **Card game nights**: Regular poker or card game groups track their wins and losses over time
+3. **Dart competitions**: Track scores and winners from dart games in the break room
+4. **Pool tournaments**: Record 8-ball and 9-ball game results to determine the office champion
+5. **Pinball arcade**: Track high scores and competition results on the office pinball machine
 
 ## Extension Opportunities
 Beyond the MVP, consider enhancing the platform with:
