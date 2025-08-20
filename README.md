@@ -3,7 +3,7 @@
 ## Event Overview
 Welcome to our 4-hour agentic coding workshop! Teams will compete to build the best game results tracking platform using AI-powered development tools.
 
-**Duration**: 4 hours (13:00 - 17:00)  
+**Duration**: 4 hours (12:00 - 16:00)  
 **Participants**: ~25 developers in 5 teams  
 **Challenge**: Build a game results tracking platform using agentic coding techniques
 
@@ -11,13 +11,13 @@ Welcome to our 4-hour agentic coding workshop! Teams will compete to build the b
 
 | Time | Duration | Activity |
 |------|----------|----------|
-| 13:00 - 13:30 | 30 min | **Introduction to Agentic Coding** <br> Concepts, tools, and techniques |
-| 13:30 - 13:45 | 15 min | **Team Formation** <br> Self-organize into balanced teams |
-| 13:45 - 15:00 | 75 min | **Coding Session 1** <br> Initial development sprint |
-| 15:00 - 15:15 | 15 min | **Mid-Workshop Review** <br> Progress check & presentation reminder |
-| 15:15 - 16:20 | 65 min | **Coding Session 2** <br> Finalize prototype & prepare demo |
-| 16:20 - 16:45 | 25 min | **Team Presentations** <br> 5 minutes per team |
-| 16:45 - 17:00 | 15 min | **Judging & Awards** <br> Winner announcement |
+| 12:00 - 12:30 | 30 min | **Introduction to Agentic Coding** <br> Concepts, tools, and techniques |
+| 12:30 - 12:45 | 15 min | **Team Formation** <br> Self-organize into balanced teams |
+| 12:45 - 14:00 | 75 min | **Coding Session 1** <br> Initial development sprint |
+| 14:00 - 14:15 | 15 min | **Mid-Workshop Review** <br> Progress check & presentation reminder |
+| 14:15 - 15:20 | 65 min | **Coding Session 2** <br> Finalize prototype & prepare demo |
+| 15:20 - 15:45 | 25 min | **Team Presentations** <br> 5 minutes per team |
+| 15:45 - 16:00 | 15 min | **Judging & Awards** <br> Winner announcement |
 
 ## Team Formation Guidelines
 
