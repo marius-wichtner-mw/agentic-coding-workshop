@@ -36,6 +36,9 @@ Each team should include members from different experience levels:
 ### Objective
 Build a platform for tracking game results with scoreboards and rankings. See [SPEC.md](SPEC.md) for detailed requirements.
 
+## Handout
+If you get stuck or it's unclear how to continue, try the [handout.md](handout.md). 
+
 ### Core Requirements (MVP)
 - User creation with username
 - Game creation with image upload
