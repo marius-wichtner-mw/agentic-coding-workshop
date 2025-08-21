@@ -4,6 +4,9 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import ErrorMessage from '@/components/ErrorMessage'
+// Base Swagger UI styles (fixes layout/styling issues)
+import 'swagger-ui-react/swagger-ui.css'
+// Our custom overrides
 import './swagger-ui.css'
 
 // Import Swagger UI without CSS (CSS handled separately)
@@ -75,7 +78,13 @@ export default function ApiDocsPage() {
         
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="swagger-ui-container" style={{ fontFamily: 'sans-serif' }}>
-            <SwaggerUI spec={spec} />
+            <SwaggerUI
+              spec={spec}
+              docExpansion="list"
+              defaultModelsExpandDepth={1}
+              defaultModelExpandDepth={1}
+              deepLinking
+            />
           </div>
         </div>
       </div>

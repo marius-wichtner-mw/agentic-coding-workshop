@@ -123,8 +123,9 @@
   border: 1px solid #d1d5db !important;
   border-radius: 0.375rem !important;
   padding: 0.5rem !important;
-  color: #1f2937 !important;
+  color: #111827 !important; /* darker for better contrast */
   background: white !important;
+  font-size: 0.95rem !important;
 }
 
 .swagger-ui input[type=text]:focus,
@@ -135,6 +136,24 @@
   border-color: #3b82f6 !important;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
   outline: none !important;
+}
+
+/* Improve placeholder visibility */
+.swagger-ui ::placeholder {
+  color: #6b7280 !important; /* gray-500 */
+  opacity: 1 !important;
+}
+
+/* Increase contrast in parameter name/description areas */
+.swagger-ui .parameter__name, .swagger-ui .parameter__description {
+  color: #111827 !important;
+}
+
+/* Ensure try-it-out input text in tables remains legible */
+.swagger-ui table .parameters-col_description input,
+.swagger-ui table .parameters-col_description textarea,
+.swagger-ui table .parameters-col_description select {
+  color: #111827 !important;
 }
 
 /* Code blocks */
