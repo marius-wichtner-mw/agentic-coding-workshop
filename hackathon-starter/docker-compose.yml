@@ -1,0 +1,71 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: game-results-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: game_results
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - game-results-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  mongo-express:
+    image: mongo-express:1.0.0
+    container_name: game-results-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password123
+      ME_CONFIG_MONGODB_URL: mongodb://admin:password123@mongodb:27017/
+      ME_CONFIG_BASICAUTH: false
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - game-results-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: game-results-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      MONGODB_URI: mongodb://admin:password123@mongodb:27017/game_results?authSource=admin
+      NODE_ENV: development
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - game-results-network
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+
+volumes:
+  mongodb_data:
+  mongodb_config:
+
+networks:
+  game-results-network:
+    driver: bridge

@@ -9,7 +9,12 @@
     "start": "next start",
     "lint": "eslint",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "docker:dev": "./docker-dev.sh",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:clean": "docker-compose down -v --remove-orphans"
   },
   "dependencies": {
     "mongodb-memory-server": "^10.2.0",

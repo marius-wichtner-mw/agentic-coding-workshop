@@ -39,13 +39,15 @@ export async function connect() {
 
     let MONGODB_URI = process.env.MONGODB_URI;
 
-    // For testing or development, use in-memory MongoDB
+    // For testing or development without MONGODB_URI, use in-memory MongoDB
     if (!MONGODB_URI || process.env.NODE_ENV === 'test') {
       // Create an in-memory MongoDB server
       const mongoServer = await MongoMemoryServer.create();
       MONGODB_URI = mongoServer.getUri();
       cached.mongoServer = mongoServer;
       console.log(`Using in-memory MongoDB at: ${MONGODB_URI}`);
+    } else {
+      console.log(`Using MongoDB at: ${MONGODB_URI}`);
     }
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
