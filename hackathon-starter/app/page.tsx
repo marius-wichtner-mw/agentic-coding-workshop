@@ -44,12 +44,12 @@ export default function Home() {
             <div className="text-3xl mb-4">📊</div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Result Tracking</h3>
             <p className="text-gray-600 mb-4">Submit game results with multiple players, scores, and automatic winner detection.</p>
-            <button 
-              disabled
-              className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-400 bg-gray-100 cursor-not-allowed"
+            <Link
+              href="/results"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              Coming Soon
-            </button>
+              Manage Results
+            </Link>
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6 text-center">

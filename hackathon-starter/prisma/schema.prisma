@@ -17,8 +17,8 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relations
-  createdGames Game[]
-  wonGames     GameResult[] @relation("GameWinner")
+  createdGames    Game[]               @relation("GameCreator")
+  gameResults     GameResultPlayer[]   @relation("GameResultPlayer")
 
   @@map("users")
 }
@@ -32,7 +32,7 @@ model Game {
   createdAt DateTime @default(now()) @map("created_at")
 
   // Relations
-  creator User         @relation(fields: [createdBy], references: [id])
+  creator User         @relation("GameCreator", fields: [createdBy], references: [id])
   results GameResult[]
 
   @@map("games")
@@ -41,15 +41,28 @@ model Game {
 model GameResult {
   id       Int      @id @default(autoincrement())
   gameId   Int      @map("game_id")
-  players  String   // JSON array of player IDs
-  scores   String   // JSON object with player scores
-  winnerId Int?     @map("winner_id")
-  playedAt DateTime @default(now()) @map("played_at")
+  playedAt DateTime @map("played_at")
+  notes    String?
   createdAt DateTime @default(now()) @map("created_at")
 
   // Relations
-  game   Game  @relation(fields: [gameId], references: [id])
-  winner User? @relation("GameWinner", fields: [winnerId], references: [id])
+  game    Game                 @relation(fields: [gameId], references: [id])
+  players GameResultPlayer[]
 
   @@map("game_results")
+}
+
+model GameResultPlayer {
+  id           Int     @id @default(autoincrement())
+  gameResultId Int     @map("game_result_id")
+  userId       Int     @map("user_id")
+  score        Float
+  isWinner     Boolean @map("is_winner")
+
+  // Relations
+  gameResult GameResult @relation(fields: [gameResultId], references: [id])
+  user       User       @relation("GameResultPlayer", fields: [userId], references: [id])
+
+  @@unique([gameResultId, userId])
+  @@map("game_result_players")
 }
