@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import UserRegistration from '@/components/UserRegistration'
 import UserLogin from '@/components/UserLogin'
 import UserProfile from '@/components/UserProfile'
@@ -14,6 +14,24 @@ interface User {
 export default function AuthPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [showLogin, setShowLogin] = useState(true)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch('/api/auth/me')
+        if (res.ok) {
+          const data = await res.json()
+          setCurrentUser(data.user)
+        }
+      } catch {
+        // Handle error silently
+      } finally {
+        setLoading(false)
+      }
+    }
+    checkAuth()
+  }, [])
 
   const handleLoginSuccess = (user: User) => {
     setCurrentUser(user)
@@ -30,6 +48,7 @@ export default function AuthPage() {
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
+      window.dispatchEvent(new Event('auth:changed'))
     } catch {
       // Ignore logout errors
     }
@@ -45,7 +64,12 @@ export default function AuthPage() {
           <p className="mt-2 text-gray-600">Manage your gaming profile and track your progress</p>
         </div>
 
-        {currentUser ? (
+        {loading ? (
+          <div className="text-center py-8">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
+            <p className="mt-2 text-gray-600">Loading...</p>
+          </div>
+        ) : currentUser ? (
           <div className="space-y-6">
             <div className="text-center">
               <p className="text-lg text-gray-700">Welcome back, <span className="font-semibold">{currentUser.username}</span>!</p>
@@ -81,7 +105,7 @@ export default function AuthPage() {
               </div>
             ) : (
               <div className="space-y-4">
-                <UserRegistration onSuccess={()=>handleRegistrationSuccess} />
+                <UserRegistration onSuccess={handleRegistrationSuccess} />
                 <div className="text-center">
                   <p className="text-sm text-gray-600">
                     Already have an account?{' '}

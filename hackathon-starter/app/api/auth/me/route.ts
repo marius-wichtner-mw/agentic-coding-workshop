@@ -12,7 +12,8 @@ export async function GET() {
     }
     
     return NextResponse.json({ user })
-  } catch {
+  } catch (error) {
+    console.error('Session error:', error)
     return NextResponse.json({
       error: 'Failed to get user session'
     }, { status: 500 })

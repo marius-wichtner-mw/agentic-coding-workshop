@@ -10,7 +10,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
 	const pathname = usePathname()
-	const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
+	const [isAuthenticated, setIsAuthenticated] = useState(false)
 
 	useEffect(() => {
 		let isMounted = true
