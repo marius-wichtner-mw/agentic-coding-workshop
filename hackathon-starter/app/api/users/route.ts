@@ -1,33 +1,67 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import { UserService } from '@/src/modules/users/application/services/UserService'
+import { PrismaUserRepository } from '@/src/modules/users/infrastructure/repositories/PrismaUserRepository'
+import { CreateUserDto } from '@/src/modules/users/application/dtos/UserDtos'
+import { AppError } from '@/src/shared/errors/AppError'
+import { ApiResponse } from '@/src/shared/types/common'
 
-// Mock data - replace with real database in production
-const mockUsers = [
-  { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'admin' },
-  { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'user' },
-  { id: 3, name: 'Charlie Brown', email: 'charlie@example.com', role: 'user' }
-]
+// Initialize dependencies
+const userRepository = new PrismaUserRepository()
+const userService = new UserService(userRepository)
 
-export async function GET() {
-  // Simulate database delay
-  await new Promise(resolve => setTimeout(resolve, 100))
-  
-  return NextResponse.json({
-    users: mockUsers,
-    total: mockUsers.length
-  })
+export async function GET(): Promise<NextResponse<ApiResponse>> {
+  try {
+    const users = await userService.getAllUsers()
+    
+    return NextResponse.json({
+      success: true,
+      data: users.map(user => user.toJSON()),
+      message: 'Users retrieved successfully'
+    })
+  } catch (error) {
+    console.error('Error getting users:', error)
+    
+    if (error instanceof AppError) {
+      return NextResponse.json({
+        success: false,
+        error: error.message
+      }, { status: error.statusCode })
+    }
+
+    return NextResponse.json({
+      success: false,
+      error: 'Internal server error'
+    }, { status: 500 })
+  }
 }
 
-export async function POST(request: Request) {
-  const body = await request.json()
-  
-  const newUser = {
-    id: mockUsers.length + 1,
-    ...body,
-    role: body.role || 'user'
+export async function POST(request: NextRequest): Promise<NextResponse<ApiResponse>> {
+  try {
+    const body = await request.json()
+    const createUserDto: CreateUserDto = {
+      username: body.username
+    }
+
+    const user = await userService.createUser(createUserDto)
+    
+    return NextResponse.json({
+      success: true,
+      data: user.toJSON(),
+      message: 'User created successfully'
+    }, { status: 201 })
+  } catch (error) {
+    console.error('Error creating user:', error)
+    
+    if (error instanceof AppError) {
+      return NextResponse.json({
+        success: false,
+        error: error.message
+      }, { status: error.statusCode })
+    }
+
+    return NextResponse.json({
+      success: false,
+      error: 'Internal server error'
+    }, { status: 500 })
   }
-  
-  return NextResponse.json({
-    message: 'User created successfully',
-    user: newUser
-  }, { status: 201 })
 }
