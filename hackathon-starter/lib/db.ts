@@ -22,8 +22,26 @@ db.exec(`
     FOREIGN KEY (created_by) REFERENCES users (id)
   );
 
+  CREATE TABLE IF NOT EXISTS game_sessions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    game_id INTEGER NOT NULL,
+    started_by INTEGER NOT NULL,
+    status TEXT NOT NULL CHECK (status IN ('setup', 'in_progress', 'completed', 'cancelled')) DEFAULT 'setup',
+    total_rounds INTEGER NOT NULL DEFAULT 1,
+    current_round INTEGER NOT NULL DEFAULT 1,
+    player1_id INTEGER NOT NULL,
+    player2_id INTEGER NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    completed_at DATETIME,
+    FOREIGN KEY (game_id) REFERENCES games (id),
+    FOREIGN KEY (started_by) REFERENCES users (id),
+    FOREIGN KEY (player1_id) REFERENCES users (id),
+    FOREIGN KEY (player2_id) REFERENCES users (id)
+  );
+
   CREATE TABLE IF NOT EXISTS game_results (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    session_id INTEGER NOT NULL,
     game_id INTEGER NOT NULL,
     player1_id INTEGER NOT NULL,
     player2_id INTEGER NOT NULL,
@@ -32,6 +50,7 @@ db.exec(`
     winner_id INTEGER NOT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     notes TEXT,
+    FOREIGN KEY (session_id) REFERENCES game_sessions (id),
     FOREIGN KEY (game_id) REFERENCES games (id),
     FOREIGN KEY (player1_id) REFERENCES users (id),
     FOREIGN KEY (player2_id) REFERENCES users (id),
@@ -62,8 +81,22 @@ export interface Game {
   created_at: string
 }
 
+export interface GameSession {
+  id: number
+  game_id: number
+  started_by: number
+  status: 'setup' | 'in_progress' | 'completed' | 'cancelled'
+  total_rounds: number
+  current_round: number
+  player1_id: number
+  player2_id: number
+  created_at: string
+  completed_at: string | null
+}
+
 export interface GameResult {
   id: number
+  session_id: number
   game_id: number
   player1_id: number
   player2_id: number

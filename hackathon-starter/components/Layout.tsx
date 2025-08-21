@@ -11,41 +11,63 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
 	const pathname = usePathname()
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
+	const [authLoading, setAuthLoading] = useState(true)
 
 	useEffect(() => {
 		let isMounted = true
 
 		const refreshAuth = async () => {
 			try {
-				const res = await fetch('/api/auth/me', { cache: 'no-store' })
+				const res = await fetch('/api/auth/me', { 
+					cache: 'no-store',
+					credentials: 'include' // Ensure cookies are included
+				})
 				if (!isMounted) return
-				setIsAuthenticated(res.ok)
-			} catch {
+				const newAuthState = res.ok
+				setIsAuthenticated(newAuthState)
+				setAuthLoading(false)
+				console.log('Auth state refreshed:', newAuthState) // Debug log
+			} catch (error) {
 				if (!isMounted) return
+				console.log('Auth check failed:', error) // Debug log
 				setIsAuthenticated(false)
+				setAuthLoading(false)
 			}
 		}
 
 		// Initial check
 		refreshAuth()
 
-		// React to custom auth change events
-		const onAuthChanged = () => refreshAuth()
+		// React to custom auth change events with small delay to ensure session is updated
+		const onAuthChanged = () => {
+			console.log('Auth changed event received') // Debug log
+			setTimeout(refreshAuth, 100) // Small delay to ensure session is updated
+		}
 		window.addEventListener('auth:changed', onAuthChanged as EventListener)
 
 		// Also refresh on window focus (covers login in another tab)
 		const onFocus = () => refreshAuth()
 		window.addEventListener('focus', onFocus)
 
+		// Also refresh on page visibility change
+		const onVisibilityChange = () => {
+			if (!document.hidden) {
+				refreshAuth()
+			}
+		}
+		document.addEventListener('visibilitychange', onVisibilityChange)
+
 		return () => {
 			isMounted = false
 			window.removeEventListener('auth:changed', onAuthChanged as EventListener)
 			window.removeEventListener('focus', onFocus)
+			document.removeEventListener('visibilitychange', onVisibilityChange)
 		}
 	}, [])
 
 	const navItems = [
 		{ href: '/', label: 'Home', icon: '🏠' },
+		{ href: '/games', label: 'Games', icon: '🎮' },
 		...(isAuthenticated ? [{ href: '/auth', label: 'Account', icon: '👤' }] : [] as { href: string; label: string; icon: string }[]),
 		{ href: '/api-docs', label: 'API Docs', icon: '📚' },
 	]

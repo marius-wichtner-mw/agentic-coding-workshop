@@ -1,8 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* HackTheBox-inspired palette */
+  --htb-bg: #0b0f13;
+  --htb-surface: #121821;
+  --htb-surface-2: #0e141c;
+  --htb-border: #1f2a37;
+  --htb-text: #e5e7eb;
+  --htb-muted: #9ca3af;
+  --htb-accent: #9fef00; /* primary neon green */
+  --htb-accent-600: #84cc16;
+  --htb-accent-700: #65a30d;
+
+  /* Backwards-compat variables consumed elsewhere */
+  --background: var(--htb-bg);
+  --foreground: var(--htb-text);
 }
 
 @theme inline {
@@ -23,4 +35,74 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  /* subtle vignette */
+  background-image: radial-gradient(1200px 600px at 20% -10%, rgba(159, 239, 0, 0.06), transparent),
+    radial-gradient(800px 400px at 100% 0%, rgba(159, 239, 0, 0.04), transparent);
 }
+
+/* Shared form control styling */
+.form-label {
+  @apply block text-sm font-semibold text-gray-800 mb-2;
+}
+
+.form-input {
+  @apply w-full rounded-lg border px-4 py-3 shadow-sm outline-none transition-all;
+  background-color: var(--htb-surface-2);
+  border-color: var(--htb-border);
+  color: var(--htb-text);
+  caret-color: var(--htb-accent);
+}
+.form-input::placeholder { color: color-mix(in oklab, var(--htb-text) 40%, transparent); }
+.form-input:hover { border-color: color-mix(in oklab, var(--htb-accent) 35%, var(--htb-border)); }
+.form-input:focus { border-color: var(--htb-accent); box-shadow: 0 0 0 2px color-mix(in oklab, var(--htb-accent) 25%, transparent); }
+
+.form-select {
+  @apply w-full appearance-none rounded-lg border px-4 py-3 shadow-sm outline-none transition-all
+    bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20stroke%3D%22%236b7280%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.5%22%20d%3D%22M6%208l4%204%204-4%22%2F%3E%3C%2Fsvg%3E')]
+    bg-[position:right_1rem_center] bg-[size:1.5em_1.5em]
+    bg-no-repeat pr-10;
+  background-color: var(--htb-surface-2);
+  border-color: var(--htb-border);
+  color: var(--htb-text);
+}
+.form-select:hover { border-color: color-mix(in oklab, var(--htb-accent) 35%, var(--htb-border)); }
+.form-select:focus { border-color: var(--htb-accent); box-shadow: 0 0 0 2px color-mix(in oklab, var(--htb-accent) 25%, transparent); }
+
+.form-helper {
+  @apply mt-2 text-sm text-gray-600;
+}
+
+.form-error {
+  @apply mt-2 rounded-lg bg-red-50 p-4 text-red-700 border border-red-200 text-sm;
+}
+
+/* Form group spacing */
+.form-group {
+  @apply mb-6;
+}
+
+/* Theme overrides for common Tailwind utility colors to match HTB palette */
+.bg-white { background-color: var(--htb-surface) !important; }
+.bg-gray-50 { background-color: var(--htb-surface-2) !important; }
+.bg-gray-100 { background-color: #111824 !important; }
+.bg-gray-200 { background-color: #0c121a !important; }
+.border-gray-200 { border-color: var(--htb-border) !important; }
+.text-gray-900 { color: var(--htb-text) !important; }
+.text-gray-700 { color: var(--htb-text) !important; }
+.text-gray-600 { color: var(--htb-muted) !important; }
+.text-gray-500 { color: var(--htb-muted) !important; }
+
+/* Accent color remaps */
+.text-blue-600, .hover\:text-blue-800:hover { color: var(--htb-accent) !important; }
+.bg-blue-600 { background-color: var(--htb-accent) !important; color: #0b0f13 !important; }
+.hover\:bg-blue-700:hover { background-color: var(--htb-accent-600) !important; }
+.focus\:ring-blue-500 { --tw-ring-color: color-mix(in oklab, var(--htb-accent) 35%, transparent) !important; }
+
+/* Keep green buttons on-brand too */
+.bg-green-600 { background-color: var(--htb-accent) !important; color: #0b0f13 !important; }
+.hover\:bg-green-700:hover { background-color: var(--htb-accent-600) !important; }
+.focus\:ring-green-500 { --tw-ring-color: color-mix(in oklab, var(--htb-accent) 35%, transparent) !important; }
+
+/* Links */
+a, a:visited { color: var(--htb-accent); }
+a:hover { color: var(--htb-accent-600); }

@@ -19,18 +19,35 @@ export default function AuthPage() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('/api/auth/me')
+        const res = await fetch('/api/auth/me', { 
+          cache: 'no-store',
+          credentials: 'include' 
+        })
         if (res.ok) {
           const data = await res.json()
           setCurrentUser(data.user)
+        } else {
+          setCurrentUser(null)
         }
       } catch {
-        // Handle error silently
+        setCurrentUser(null)
       } finally {
         setLoading(false)
       }
     }
+    
     checkAuth()
+
+    // Listen for auth changes
+    const onAuthChanged = () => {
+      console.log('Auth page: Auth changed event received')
+      checkAuth()
+    }
+    window.addEventListener('auth:changed', onAuthChanged as EventListener)
+
+    return () => {
+      window.removeEventListener('auth:changed', onAuthChanged as EventListener)
+    }
   }, [])
 
   const handleLoginSuccess = (user: User) => {
