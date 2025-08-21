@@ -56,12 +56,12 @@ export default function Home() {
             <div className="text-3xl mb-4">🏆</div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Scoreboards</h3>
             <p className="text-gray-600 mb-4">View rankings and statistics with automatic scoreboard updates.</p>
-            <button 
-              disabled
-              className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-400 bg-gray-100 cursor-not-allowed"
+            <Link
+              href="/scoreboard"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              Coming Soon
-            </button>
+              View Scoreboard
+            </Link>
           </div>
         </div>
       </div>
