@@ -68,6 +68,7 @@ export default function Layout({ children }: LayoutProps) {
 	const navItems = [
 		{ href: '/', label: 'Home', icon: '🏠' },
 		{ href: '/games', label: 'Games', icon: '🎮' },
+		{ href: '/scoreboards', label: 'Scoreboards', icon: '🏆' },
 		...(isAuthenticated ? [{ href: '/auth', label: 'Account', icon: '👤' }] : [] as { href: string; label: string; icon: string }[]),
 		{ href: '/api-docs', label: 'API Docs', icon: '📚' },
 	]
