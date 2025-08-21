@@ -77,6 +77,23 @@ Top teams will be awarded based on combined functional and non-functional scores
 - **AI Tools Setup**: See [SETUP.md](SETUP.md) for Codex, Claude Code, and RooCode configuration
 - **Support**: Workshop facilitators will be available for questions
 
+## Starter Template
+
+A Next.js starter template is available in the `hackathon-starter/` folder.
+
+**Tech Stack**: Next.js 15, TypeScript, Tailwind CSS, Jest
+
+**Requirements**: Node.js 18+
+
+**Quick Start**:
+```bash
+cd hackathon-starter
+npm install
+npm run dev
+```
+
+The app will run at `http://localhost:3000`
+
 ---
 
 Good luck and happy coding! Remember: it's not just about features—quality, design, and effective AI usage matter equally.
