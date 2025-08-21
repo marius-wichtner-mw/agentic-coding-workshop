@@ -4,7 +4,9 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import ErrorMessage from '@/components/ErrorMessage'
+import './swagger-ui.css'
 
+// Import Swagger UI without CSS (CSS handled separately)
 const SwaggerUI = dynamic(() => import('swagger-ui-react'), { ssr: false })
 
 export default function ApiDocsPage() {
@@ -72,7 +74,9 @@ export default function ApiDocsPage() {
         </div>
         
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <SwaggerUI spec={spec} />
+          <div className="swagger-ui-container" style={{ fontFamily: 'sans-serif' }}>
+            <SwaggerUI spec={spec} />
+          </div>
         </div>
       </div>
     </div>
