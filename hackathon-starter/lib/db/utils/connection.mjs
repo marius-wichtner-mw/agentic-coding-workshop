@@ -1,27 +1,11 @@
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 
-// Define the type for our cached connection
-interface MongooseCache {
-  conn: typeof mongoose | null;
-  promise: Promise<typeof mongoose> | null;
-  mongoServer?: MongoMemoryServer;
-}
-
-// Declare global mongoose cache
-declare global {
-  var mongoose: MongooseCache | undefined;
-}
-
-/**
- * Global is used here to maintain a cached connection across hot reloads
- * in development. This prevents connections growing exponentially
- * during API Route usage.
- */
-let cached: MongooseCache = global.mongoose || { conn: null, promise: null };
+// Global is used here to maintain a cached connection across hot reloads
+let cached = global.mongoose || { conn: null, promise: null, mongoServer: null };
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+  cached = global.mongoose = { conn: null, promise: null, mongoServer: null };
 }
 
 /**
@@ -39,15 +23,13 @@ export async function connect() {
 
     let MONGODB_URI = process.env.MONGODB_URI;
 
-    // For testing or development without MONGODB_URI, use in-memory MongoDB
+    // For testing or development, use in-memory MongoDB
     if (!MONGODB_URI || process.env.NODE_ENV === 'test') {
       // Create an in-memory MongoDB server
       const mongoServer = await MongoMemoryServer.create();
       MONGODB_URI = mongoServer.getUri();
       cached.mongoServer = mongoServer;
       console.log(`Using in-memory MongoDB at: ${MONGODB_URI}`);
-    } else {
-      console.log(`Using MongoDB at: ${MONGODB_URI}`);
     }
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
