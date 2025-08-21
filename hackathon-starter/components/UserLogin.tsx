@@ -40,6 +40,8 @@ export default function UserLogin({ onSuccess }: UserLoginProps) {
 
       setUsername('')
       onSuccess?.(data.user)
+      // notify layout/header to refresh auth-aware UI
+      window.dispatchEvent(new Event('auth:changed'))
     } catch {
       setError('Network error. Please try again.')
     } finally {

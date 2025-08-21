@@ -2,20 +2,53 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 interface LayoutProps {
   children: ReactNode
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const pathname = usePathname()
+	const pathname = usePathname()
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
 
-  const navItems = [
-    { href: '/', label: 'Home', icon: '🏠' },
-    { href: '/auth', label: 'Account', icon: '👤' },
-    { href: '/api-docs', label: 'API Docs', icon: '📚' },
-  ]
+	useEffect(() => {
+		let isMounted = true
+
+		const refreshAuth = async () => {
+			try {
+				const res = await fetch('/api/auth/me', { cache: 'no-store' })
+				if (!isMounted) return
+				setIsAuthenticated(res.ok)
+			} catch {
+				if (!isMounted) return
+				setIsAuthenticated(false)
+			}
+		}
+
+		// Initial check
+		refreshAuth()
+
+		// React to custom auth change events
+		const onAuthChanged = () => refreshAuth()
+		window.addEventListener('auth:changed', onAuthChanged as EventListener)
+
+		// Also refresh on window focus (covers login in another tab)
+		const onFocus = () => refreshAuth()
+		window.addEventListener('focus', onFocus)
+
+		return () => {
+			isMounted = false
+			window.removeEventListener('auth:changed', onAuthChanged as EventListener)
+			window.removeEventListener('focus', onFocus)
+		}
+	}, [])
+
+	const navItems = [
+		{ href: '/', label: 'Home', icon: '🏠' },
+		...(isAuthenticated ? [{ href: '/auth', label: 'Account', icon: '👤' }] : [] as { href: string; label: string; icon: string }[]),
+		{ href: '/api-docs', label: 'API Docs', icon: '📚' },
+	]
 
   return (
     <div className="min-h-screen bg-gray-50">

@@ -34,6 +34,8 @@ export default function UserRegistration({ onSuccess }: UserRegistrationProps) {
 
       setUsername('')
       onSuccess?.(data.user)
+      // If registration implies login in your flow, emit auth change
+      window.dispatchEvent(new Event('auth:changed'))
     } catch {
       setError('Network error. Please try again.')
     } finally {
