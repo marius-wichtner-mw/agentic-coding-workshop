@@ -23,7 +23,8 @@ export async function createSession(userId: number): Promise<string> {
     .run(sessionId, userId, expiresAt.toISOString())
   
   // Set cookie
-  cookies().set(SESSION_COOKIE_NAME, sessionId, {
+  const cookieStore = await cookies()
+  cookieStore.set(SESSION_COOKIE_NAME, sessionId, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
@@ -35,7 +36,8 @@ export async function createSession(userId: number): Promise<string> {
 }
 
 export async function getSession(): Promise<User | null> {
-  const sessionId = cookies().get(SESSION_COOKIE_NAME)?.value
+  const cookieStore = await cookies()
+  const sessionId = cookieStore.get(SESSION_COOKIE_NAME)?.value
   
   if (!sessionId) {
     return null
@@ -63,7 +65,8 @@ export async function getSession(): Promise<User | null> {
 }
 
 export async function destroySession(): Promise<void> {
-  const sessionId = cookies().get(SESSION_COOKIE_NAME)?.value
+  const cookieStore = await cookies()
+  const sessionId = cookieStore.get(SESSION_COOKIE_NAME)?.value
   
   if (sessionId) {
     // Remove from database
@@ -71,7 +74,7 @@ export async function destroySession(): Promise<void> {
   }
   
   // Clear cookie
-  cookies().delete(SESSION_COOKIE_NAME)
+  cookieStore.delete(SESSION_COOKIE_NAME)
 }
 
 export async function cleanupExpiredSessions(): Promise<void> {
