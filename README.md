@@ -74,6 +74,7 @@ Top teams will be awarded based on combined functional and non-functional scores
 ## Resources
 
 - **Requirements**: See [SPEC.md](SPEC.md)
+- **AI Tools Setup**: See [SETUP.md](SETUP.md) for Codex, Claude Code, and RooCode configuration
 - **Support**: Workshop facilitators will be available for questions
 
 ---
