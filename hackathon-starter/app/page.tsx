@@ -11,7 +11,6 @@ export default function Home() {
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Track game results across different types of games with scoreboards and player rankings.
-            Built with Next.js, TypeScript, Prisma, and following clean architecture principles.
           </p>
         </div>
 
@@ -33,12 +32,12 @@ export default function Home() {
             <div className="text-3xl mb-4">🎮</div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Game Management</h3>
             <p className="text-gray-600 mb-4">Create games with images and categorize them by type (video, table, card games).</p>
-            <button 
-              disabled
-              className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-400 bg-gray-100 cursor-not-allowed"
+            <Link
+              href="/games"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              Coming Soon
-            </button>
+              Manage Games
+            </Link>
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
@@ -64,40 +63,6 @@ export default function Home() {
               Coming Soon
             </button>
           </div>
-        </div>
-
-        {/* Architecture Info */}
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Architecture & Implementation</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Clean Architecture</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• <strong>Domain Layer:</strong> Business entities and rules</li>
-                <li>• <strong>Application Layer:</strong> Use cases and services</li>
-                <li>• <strong>Infrastructure Layer:</strong> Database and external services</li>
-                <li>• <strong>Presentation Layer:</strong> UI components and API routes</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Development Practices</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• <strong>TDD:</strong> Test-driven development approach</li>
-                <li>• <strong>SOLID:</strong> Following SOLID principles</li>
-                <li>• <strong>Feature-based:</strong> Modular architecture by domain</li>
-                <li>• <strong>Type Safety:</strong> Full TypeScript implementation</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Current Status */}
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-blue-900 mb-2">🚀 Phase 1 & 2 Complete!</h3>
-          <p className="text-blue-800">
-            The foundation and Users module have been implemented following clean architecture principles with comprehensive testing. 
-            The user management system is fully functional with CRUD operations, validation, and a clean UI.
-          </p>
         </div>
       </div>
     </main>
