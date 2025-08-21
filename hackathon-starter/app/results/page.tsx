@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import GameResultForm from '@/src/modules/results/presentation/components/GameResultForm'
 import GameResultList from '@/src/modules/results/presentation/components/GameResultList'
 import { PlayerResult } from '@/src/modules/results/domain/entities/GameResult'
@@ -247,10 +248,37 @@ export default function ResultsPage() {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Game Results</h1>
-          <p className="mt-2 text-gray-600">
-            Track and manage game results with player scores and winners
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Game Results</h1>
+              <p className="mt-2 text-gray-600">
+                Track and manage game results with player scores and winners
+              </p>
+            </div>
+            
+            {/* Navigation breadcrumb */}
+            <nav className="flex" aria-label="Breadcrumb">
+              <ol className="flex items-center space-x-4">
+                <li>
+                  <div>
+                    <Link href="/" className="text-gray-400 hover:text-gray-500">
+                      Home
+                    </Link>
+                  </div>
+                </li>
+                <li>
+                  <div className="flex items-center">
+                    <svg className="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="ml-4 text-sm font-medium text-gray-500">
+                      Results
+                    </span>
+                  </div>
+                </li>
+              </ol>
+            </nav>
+          </div>
         </div>
 
         {/* Message */}
